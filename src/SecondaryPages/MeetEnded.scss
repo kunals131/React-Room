@@ -1,0 +1,34 @@
+
+.meet-ended-container {
+
+    height: 87vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content-meetend {
+    width: 70%;
+    margin: auto;
+    h1 {
+        font-size: 5rem;
+        text-align: left;
+        color: rgb(63, 63, 63);
+    }
+    p {
+        font-size: 1.1rem;
+        text-align: left;
+    }
+    Link {
+        padding: 1rem 1.2rem;
+        margin-top: 1rem;
+        background-color: purple;
+        color: white;
+        text-decoration: none;
+    }
+    .button {
+        display: flex;
+        .button-2 {
+            margin-left: 1rem;
+        }
+    }
+}
+}

@@ -1,0 +1,52 @@
+@import "../../index.scss";
+
+.authview {
+  .authview__container {
+    width: 40%;
+    margin: auto;
+  
+  }
+  &__navigation {
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: $primary-color-less;
+    border-radius: 10px;
+    &__item {
+        font-size: 1.2rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $primary-color;
+            padding: 0.5rem 20%;
+            border-radius: 10px;
+            color: white;
+        }
+    }
+  }
+  &__content {
+      margin-top: 2rem;
+      border-radius: 10px;
+      background-color: $primary-color-less-2;
+      &__login {
+          &__form {
+          display: flex;
+          flex-direction: column;
+          padding: 2rem 2rem;
+          }
+      }
+  }
+}
+
+
+.active-x {
+    background-color: $primary-color;
+    padding: 0.6rem 20%;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}

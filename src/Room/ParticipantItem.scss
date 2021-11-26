@@ -1,0 +1,38 @@
+$dark-color : #3F3D56;
+.participantItem {
+    width : 20rem;
+    height : 20rem;
+    margin : 0.33rem;
+    font-size: 5rem;
+    display: flex;
+    border-radius: 6px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+    border-radius: 0.33rem;
+    transition: all 0.1s ease-in;
+
+    &:hover {
+
+    }
+    background-attachment: white;
+    background: linear-gradient(
+        0deg,
+         rgb(24, 24, 24) 0%,
+        $dark-color 100%
+      );
+    &__video {
+        border-radius: inherit;
+    }
+    &__no-stream {
+        display: flex;
+        color: rgba($color: white, $alpha: 0.5);
+        font-size: 3rem;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+

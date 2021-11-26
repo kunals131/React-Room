@@ -1,0 +1,49 @@
+@import '../../index.scss';
+.header {
+    
+    &__content {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        padding: 1.9rem 0;
+
+        
+        &__logo {
+            width: 15%;
+        }
+        &__user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            &-icon {
+                width: 15%;
+            }
+            &-name {
+                margin-left: 0.3rem;
+                font-weight: 500;
+                &:hover {
+                    color: #6C63FF;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.submenu {
+    position: absolute;
+    top: 60px;
+    right : 150px;
+}
+
+.activez {
+    color: $primary-color;
+    text-decoration: underline;
+}
+
+.activeSub {
+    background-color: rgb(155, 155, 155);
+}

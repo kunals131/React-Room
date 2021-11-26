@@ -1,0 +1,67 @@
+.sb {
+    height: 85vh;
+    width: 25vw;
+    border-radius: 1rem;
+    position: absolute;
+    left : 70vw;
+    top: 10vh;
+    background-color: white;
+    padding: 1rem;
+    &__nav {
+        margin-top: 1.2rem;
+    }
+    &__container {
+      
+        margin-top: 1.5rem;
+        &__items {
+            padding: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            &-item {
+                display: flex;
+                padding: 1rem;
+                width: 80%;
+                margin: auto;
+                font-size: 1.2rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.308);
+                justify-content: center;
+                border-radius: 10px;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba(128, 128, 128, 0.274);
+                }
+                &-2 {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-top: 8rem;
+                    p {
+                        margin-bottom: 2rem;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        font-weight: 500;
+                        &:hover {
+                            text-decoration: underline;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ui.three.item.menu {
+    margin-top: 0.5rem;
+}
+
+@media screen and (max-width:950px) {
+    .sb {
+        width : 70vw;
+    }
+    
+}

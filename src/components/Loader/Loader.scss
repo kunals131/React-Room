@@ -1,0 +1,35 @@
+@import '../../index.scss';
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: black;
+    text-align: center;
+
+}
+.loading__text {
+    text-align: center;
+    animation: animation 1s alternate-reverse infinite ease-in-out ;
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 300;
+    
+
+}
+
+@keyframes animation {
+0%{
+  
+
+
+}
+100% {
+    
+    opacity: 1;
+    letter-spacing: 0.4rem;
+}
+}
