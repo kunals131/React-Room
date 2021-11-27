@@ -1,5 +1,11 @@
 .roomview-container {
     background-color: black;
     height: 100vh;
-    overflow: hidden;
+    // overflow: hidden;
+}
+
+.smartpopup {
+    position: relative;
+    top: -25vh;
+    left : 20px
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import "./ParticipantItem.scss";
 import { connect } from "react-redux";
+import recognition from "./Speech";
 import { conference } from "@voxeet/voxeet-web-sdk";
 
 const ParticipantItem = ({ participant, isSelf, controls }) => {
@@ -8,11 +9,14 @@ const ParticipantItem = ({ participant, isSelf, controls }) => {
   const { id, stream, isVideo } = participant;
   const videoRef = useRef();
   const [speakingState, setSpeakingState] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       conference.isSpeaking(participant.participant, (isSpeaking) => {
         if (isSpeaking) {
           setSpeakingState(true);
+
+          // console.log('Eee')
         } else {
           setSpeakingState(false);
         }

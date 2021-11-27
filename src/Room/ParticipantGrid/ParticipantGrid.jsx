@@ -19,7 +19,7 @@ const ParticipantGrid = (props) => {
       <div className="pg__container">
         <div className="pg__container-items">
           {props.participantList.map((participant)=>{
-            return <ParticipantItem participant={participant}/>
+            return <ParticipantItem key = {participant.id}participant={participant}/>
           })}
     
         </div>

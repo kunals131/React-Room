@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { commands, cleanUp } from "../SmartPopup/smartFunctions";
 
 import { connect } from "react-redux";
 import "./Controller.scss";
-import { setMic, setVideo } from "../../actions";
+import { setMic, setVideo, setVoiceRecog, setPopupMessage } from "../../actions";
 import {
   startVideo,
   stopVideo,
@@ -10,7 +11,7 @@ import {
   stopAudio,
   leaveConference,
 } from "../Voxeet/VoxeetUtils";
-
+import recognition from "../Speech";
 
 const Controller = ({
   controls,
@@ -19,9 +20,15 @@ const Controller = ({
   setMic,
   setConference,
   participants,
-  showSidebar
+  showSidebar,
+  conf,
+  popupMessage,
+  user,
+  setVoiceRecog,
+  setPopupMessage
 }) => {
   const [Link, setLink] = useState(false);
+  const [recog,setRecog] = useState(false); 
 
   const handleSidebar = ()=>{
     showSidebar((prev)=>{
@@ -53,12 +60,99 @@ const Controller = ({
 
   const copyLink = ()=>{
     let url = window.location.origin;
-    url+=`/?name=Guest&meetid=${234}`;
-    navigator.clipboard.writeText(url);
+    url+=`/${conf}`;
+    let text= `${user} has invited to join Dolby Room : ${url}`
+    navigator.clipboard.writeText(text);
     setLink(true);
     setTimeout(()=>setLink(false),2000);
 
   }
+
+  const handleTasks= async (task)=>{
+    switch(task) {
+      case 'TURN_ON_MIC' : {
+        await controlMic(true);
+        setPopup('Mic Turned On')
+        return true;
+      }
+      case 'TURN_OFF_MIC' : {
+        await controlMic(false);
+        setPopup('Mic Turned Off')
+        return true;
+
+      }
+      case 'TURN_OFF_VIDEO' : {
+        await controlVideo(false);
+        setPopup('VIDEO TURNED OFF!')
+        return true;
+      }
+      case 'TURN_ON_VIDEO' : {
+        await controlVideo(true);
+        setPopup('Video Turned On')
+        return true
+      }
+      default : return false;
+    }
+  }
+
+  const setPopup = (message)=>{
+    if (popupMessage) {
+      setTimeout(()=>{
+        setPopupMessage(message);
+      }, 1500)
+    }else {
+      setPopupMessage(message);
+    }
+  }
+
+  const compareCommands = async (transcript)=>{
+    for(let c of commands) {
+      for(let idx of c.match) {
+        if (transcript.includes(idx)) {
+          if (c.task) {
+            const ans = await handleTasks(c.task);
+            if (ans) return;
+          }
+        }
+      }
+    }
+
+  }
+
+  recognition.onresult = e=>{
+    let current = cleanUp(e.results[0][0].transcript);
+    console.log('confiedence : ' + e.results[0][0].confidence)
+    setPopup(e.results[0][0].transcript);
+    compareCommands(current);
+
+  }
+
+  const controlVoiceRecog = (state)=>{
+    setVoiceRecog(state);
+
+    if (state) {
+      setPopup('Listening...')
+      if (!recog) {
+      recognition.start();
+      }
+      recognition.onend = ()=>{
+        // setPopup('Still Listening...')
+        recognition.start();
+      }
+      setRecog(true);
+    }
+    else {
+      recognition.stop();
+      recognition.onend = ()=>{
+        setRecog(false);
+      }
+      setPopup('I hope to meet you soon! ')
+    }
+  }
+
+
+
+
 
   return (
     <div className="controller">
@@ -105,6 +199,18 @@ const Controller = ({
           >
             <i className="fab fa-ethereum"></i>
           </div>
+          <div
+            className="controller__center-item" onClick={() => controlVoiceRecog(!controls.voiceRecog)}
+          >
+           <i title="Mic (Turn Off the Mic/ Mute me) Video (Turn On the Video /Dont Show Me )" 
+              className={
+                controls.voiceRecog 
+                  ? "fab fa-teamspeak"
+                  : "far fa-play-circle"
+              }
+
+            ></i>
+          </div>
           
         </div>
       </div>
@@ -114,13 +220,17 @@ const Controller = ({
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     controls: state.controls,
+    user : 'kunal',
+    popupMessage : state.popupMessage
   };
 };
 
 export default connect(mapStateToProps, {
   setVideo,
   setMic,
-
+  setPopupMessage,
+  setVoiceRecog
 })(Controller);

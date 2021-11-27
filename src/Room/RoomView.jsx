@@ -2,32 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { setActivity, setLoadingState, setConference} from "../actions";
+import {
+  setActivity,
+  setLoadingState,
+  setConference,
+  setPopupMessage,
+} from "../actions";
 import ParticipantGrid from "./ParticipantGrid/ParticipantGrid";
 import Controller from "./Controller/Controller";
 import "./RoomView.scss";
 import Loader from "../components/Loader/Loader";
 import Sidebar from "./Sidebar/Sidebar";
-import { conference, session } from "@voxeet/voxeet-web-sdk";
+import { conference, session, notification } from "@voxeet/voxeet-web-sdk";
+import SmartPopup from "./SmartPopup/SmartPopup";
 
 import {
   createConference,
   createSession,
   joinConference,
-  leaveConference
+  leaveConference,
 } from "./Voxeet/VoxeetUtils";
 
-const RoomView = ({ setActivity, user, isSignin, setConference }) => {
+const RoomView = ({
+  setActivity,
+  user,
+  isSignin,
+  setConference,
+  setPopupMessage,
+  popupMessage,
+}) => {
   const [sidebar, setSidebar] = useState(false);
   const [loader, setLoader] = useState(true);
   const [participantList, setParticipantList] = useState([]);
   const [participantNameList, setParticipantNameList] = useState([]);
   const [Host, setHost] = useState({});
   const [conferenceId, setConferenceId] = useState("");
-  const [background, setBackground] = useState('black');
+  const [background, setBackground] = useState("black");
   const bgStyle = {
-    background : background==='black'?'black':`url(https://source.unsplash.com/1920x1080/?${background}) center center/cover`
-  }
+    background:
+      background === "black"
+        ? "black"
+        : `url(https://source.unsplash.com/1920x1080/?${background}) center center/cover`,
+  };
 
   const params = new useParams();
   useEffect(() => {
@@ -58,8 +74,6 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
     });
     setParticipantNameList(namelist);
   };
-
-
 
   const StreamUpdatedFunction = (participant, stream) => {
     console.log("STREAM UPDATED");
@@ -123,7 +137,7 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
 
   const participantUpdatedFunction = (participant, stream) => {
     if (participant.status === "Left") return;
-  
+
     // const newParticipantList = [...participantList].filter((el) => {
     //   return el.id !== participant.id;
     // });
@@ -137,6 +151,7 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
     conference.on("streamRemoved", streamRemovedFunction);
     conference.on("participantUpdated", participantUpdatedFunction);
     conference.on("left", () => console.log("conference left"));
+    notification.on("participantLeft", () => {console.log('left')});
 
     return () => {
       conference.off("streamAdded", StreamUpdatedFunction);
@@ -146,20 +161,35 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
     };
   }, [participantList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(()=>{
-    const timer = setInterval(()=>{
-      participantList.map((participant)=>{
-        conference.isSpeaking(participant.participant, (isSpeaking)=>{
-          if (isSpeaking){
-            const newList = participantList.filter((par)=>par.id!==participant.id);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      participantList.map((participant) => {
+        conference.isSpeaking(participant.participant, (isSpeaking) => {
+          if (isSpeaking) {
+            const newList = participantList.filter(
+              (par) => par.id !== participant.id
+            );
             let listToBeAdded = [participant, ...newList];
             setParticipantList(listToBeAdded);
           }
-        })
-      })
+        });
+      });
     }, 500);
-    return ()=>{clearInterval(timer)}
-  }, [])
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(()=>{
+    if (popupMessage!=='') {
+      setTimeout(()=>{
+        setPopupMessage('');
+
+      }, 2000);
+    }
+
+
+  }, [popupMessage])
 
   return (
     <>
@@ -169,8 +199,18 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
         <div className="roomview-container" style={bgStyle}>
           <Header id={conferenceId}></Header>
           <ParticipantGrid participantList={participantList} />
-          <Controller showSidebar={setSidebar}></Controller>
-          {sidebar && <Sidebar setBackground={setBackground} participantList={participantNameList} />}
+          <Controller conf={conferenceId} showSidebar={setSidebar}></Controller>
+          {sidebar && (
+            <Sidebar
+              setBackground={setBackground}
+              participantList={participantNameList}
+            />
+          )}
+          {popupMessage && (
+            <div className="smartpopup">
+              <SmartPopup text={popupMessage} />
+            </div>
+          )}
         </div>
       )}
     </>
@@ -183,9 +223,12 @@ const mapStateToProps = (state) => {
     isActive: state.isActive,
     user: state.authStatus.user,
     isSignin: state.authStatus.isSignin,
+    popupMessage: state.popupMessage,
   };
 };
 
 export default connect(mapStateToProps, {
-  setActivity, setConference
+  setActivity,
+  setConference,
+  setPopupMessage,
 })(RoomView);

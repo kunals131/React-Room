@@ -63,3 +63,17 @@ export const setConference = (conference)=>{
         payload : conference
     }
 }
+
+export const setPopupMessage = (message)=>{
+    return {
+        type : 'SET_MESSAGE',
+        payload : message
+    }
+}
+
+export const setVoiceRecog = (state)=>{
+    return {
+        type : 'SET_VOICE_RECOG',
+        payload : state
+    }
+}

@@ -3,6 +3,7 @@ const initialState = {
     video : false,
     screenShare : false,
     conference : 'null',
+    voiceRecog : false
 
 }
 
@@ -19,6 +20,9 @@ export default (state = initialState, action)=>{
         }
         case 'SET_CONFERENCE' : return {
             ...state, conference : action.payload
+        }
+        case 'SET_VOICE_RECOG' : return {
+            ...state, voiceRecog : action.payload
         }
         default : 
         return state;

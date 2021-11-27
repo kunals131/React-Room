@@ -1,0 +1,25 @@
+$primary-color : #a5a1fada;
+.popup {
+    background-color: $primary-color;
+    opacity: 0.9;
+    width: 360px;
+    height: 100px;
+    border-radius: 10px;
+    &__content {
+        width: 95%;
+        color: white;
+        padding: 1rem;
+        margin: auto;
+        &__heading {
+            width: 80%;
+            font-size: 1rem;
+            font-weight: 500;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid rgb(231, 231, 231);
+        }
+        p {
+            font-size: 0.9rem;
+            margin-top: 0.7rem;
+        }
+    }
+}
