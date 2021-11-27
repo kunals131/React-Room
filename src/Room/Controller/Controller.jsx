@@ -91,6 +91,10 @@ const Controller = ({
         setPopup('Video Turned On')
         return true
       }
+      case 'STOP_VOICE_RECOG' :{
+         controlVoiceRecog(false);
+         return true;
+      }
       default : return false;
     }
   }
@@ -200,7 +204,7 @@ const Controller = ({
             <i className="fab fa-ethereum"></i>
           </div>
           <div
-            className="controller__center-item" onClick={() => controlVoiceRecog(!controls.voiceRecog)}
+            className="controller__center-item controlbtn" onClick={() => controlVoiceRecog(!controls.voiceRecog)}
           >
            <i title="Mic (Turn Off the Mic/ Mute me) Video (Turn On the Video /Dont Show Me )" 
               className={

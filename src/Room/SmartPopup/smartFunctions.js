@@ -4,7 +4,7 @@ export const commands = [
         task : 'TURN_OFF_MIC'
     },
     {
-        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONTHEMIC'],
+        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONMYEMIC'],
         task : 'TURN_ON_MIC'
     }, 
     {
@@ -12,7 +12,7 @@ export const commands = [
         task : 'TURN_ON_VIDEO'
     }, 
     {
-        match : ['SHUTVIDEO', 'DONTSHOWME'],
+        match : ['SHUTVIDEO', 'DONTSHOWME', "TURNOFFTHEVIDEO", 'TURNOFFMYVIDEO', ],
         task : 'TURN_OFF_VIDEO'
     },
     {
@@ -27,6 +27,10 @@ export const commands = [
     {
         match : ['STARTMYSCREENSHARE', 'TURNONMYSCREENSHARE']
     },
+    {
+        match : ['GOODBYE', 'GOAWAY', 'STOPVOICERECOGNIZATION', 'GOAWAY'],
+        task : 'STOP_VOICE_RECOG'
+    }
     
 
 ]
