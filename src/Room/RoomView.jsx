@@ -42,7 +42,7 @@ const RoomView = ({ setActivity, user, isSignin, setConference }) => {
       console.log(conf);
       console.log("Conference Created!");
       setConference(params.roomid);
-      setConferenceId(conf.id);
+      setConferenceId(params.roomid);
       const join = await joinConference(conf);
       console.log("Joined Conference!");
       setLoader(false);
