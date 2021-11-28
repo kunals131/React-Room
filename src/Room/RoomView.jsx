@@ -7,7 +7,7 @@ import {
   setLoadingState,
   setConference,
   setPopupMessage,
-  setIsPresenting
+  setIsPresenting,
 } from "../actions";
 import ParticipantGrid from "./ParticipantGrid/ParticipantGrid";
 import Controller from "./Controller/Controller";
@@ -16,6 +16,7 @@ import Loader from "../components/Loader/Loader";
 import Sidebar from "./Sidebar/Sidebar";
 import { conference, session, notification } from "@voxeet/voxeet-web-sdk";
 import SmartPopup from "./SmartPopup/SmartPopup";
+import ConfigurationModal from "./ConfigurationModal";
 
 import {
   createConference,
@@ -32,7 +33,8 @@ const RoomView = ({
   controls,
   setIsPresenting,
   setPopupMessage,
-  popupMessage,
+  tempUser,
+  popupMessage, ...props
 }) => {
   const [sidebar, setSidebar] = useState(false);
   const [loader, setLoader] = useState(true);
@@ -41,6 +43,7 @@ const RoomView = ({
   const [Host, setHost] = useState({});
   const [conferenceId, setConferenceId] = useState("");
   const [background, setBackground] = useState("black");
+
   const bgStyle = {
     background:
       background === "black"
@@ -55,18 +58,23 @@ const RoomView = ({
 
   useEffect(() => {
     const handleCreation = async () => {
-      await createSession(user.name, user.id);
-      console.log("Created session with id " + user.name);
+      const Sname = isSignin?user.name:props.inputName;
+      const Sid = isSignin?user.id:Math.floor(Math.random()*32323);
+      await createSession(Sid, Sname);
+      console.log("Created session with id " + Sname);
       const conf = await createConference(params.roomid);
       console.log(conf);
       console.log("Conference Created!");
       setConference(params.roomid);
+      const joinConf ={audio : true, dolbyVoice : true}
       setConferenceId(params.roomid);
-      const join = await joinConference(conf);
+      const join = await joinConference(conf, joinConf);
       console.log("Joined Conference!");
+      
       setLoader(false);
     };
-    handleCreation();
+    setTimeout(handleCreation, 2000)
+    
   }, []);
 
   const fetchAndSetNames = async () => {
@@ -81,7 +89,7 @@ const RoomView = ({
   const StreamUpdatedFunction = (participant, stream) => {
     console.log("STREAM UPDATED");
     fetchAndSetNames();
-    if (stream.type==='ScreenShare'){
+    if (stream.type === "ScreenShare") {
       setIsPresenting(true);
     }
     // if (stream.type === "screen-share") return;
@@ -123,7 +131,7 @@ const RoomView = ({
   const streamRemovedFunction = (participant, stream) => {
     if (participant.status === "Left") return;
     console.log(stream);
-    if (stream.type==='ScreenShare') {
+    if (stream.type === "ScreenShare") {
       setIsPresenting(false);
     }
 
@@ -146,19 +154,18 @@ const RoomView = ({
 
   const participantUpdatedFunction = (participant, stream) => {
     if (participant.status === "Left") {
-      for(let st of participant.streams) {
-        if (st.type==='ScreenShare') {
+      for (let st of participant.streams) {
+        if (st.type === "ScreenShare") {
           setIsPresenting(false);
         }
       }
 
-      const newParticipantList = [...participantList].filter((el)=>{
-        return el.id!==participant.id;
-      })
+      const newParticipantList = [...participantList].filter((el) => {
+        return el.id !== participant.id;
+      });
       setParticipantList(newParticipantList);
-      setPopupMessage(`${participant.info.name} Left!`)
+      setPopupMessage(`${participant.info.name} Left!`);
     }
-    
 
     // const newParticipantList = [...participantList].filter((el) => {
     //   return el.id !== participant.id;
@@ -173,7 +180,9 @@ const RoomView = ({
     conference.on("streamRemoved", streamRemovedFunction);
     conference.on("participantUpdated", participantUpdatedFunction);
     conference.on("left", () => console.log("conference left"));
-    notification.on("participantLeft", () => {console.log('left')});
+    notification.on("participantLeft", () => {
+      console.log("left");
+    });
 
     return () => {
       conference.off("streamAdded", StreamUpdatedFunction);
@@ -184,7 +193,7 @@ const RoomView = ({
   }, [participantList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    console.log(conference.participants)
+    console.log(conference.participants);
     const timer = setInterval(() => {
       participantList.map((participant) => {
         conference.isSpeaking(participant.participant, (isSpeaking) => {
@@ -201,19 +210,15 @@ const RoomView = ({
     return () => {
       clearInterval(timer);
     };
-   
   }, []);
 
-  useEffect(()=>{
-    if (popupMessage!=='') {
-      setTimeout(()=>{
-        setPopupMessage('');
-
+  useEffect(() => {
+    if (popupMessage !== "") {
+      setTimeout(() => {
+        setPopupMessage("");
       }, 2000);
     }
-
-
-  }, [popupMessage])
+  }, [popupMessage]);
 
   return (
     <>
@@ -221,8 +226,12 @@ const RoomView = ({
         <Loader text="Setting up Conference!" />
       ) : (
         <div className="roomview-container" style={bgStyle}>
-          <Header id={conferenceId}></Header>
-          <ParticipantGrid isPresenting={controls.isPresenting} isScreenShare={controls.screenShare} participantList={participantList} />
+          <Header name={props.inputName} id={conferenceId}></Header>
+          <ParticipantGrid
+            isPresenting={controls.isPresenting}
+            isScreenShare={controls.screenShare}
+            participantList={participantList}
+          />
           <Controller conf={conferenceId} showSidebar={setSidebar}></Controller>
           {sidebar && (
             <Sidebar
@@ -246,6 +255,7 @@ const mapStateToProps = (state) => {
     controls: state.controls,
     isActive: state.isActive,
     user: state.authStatus.user,
+    tempUser : state.tempUser,
     isSignin: state.authStatus.isSignin,
     popupMessage: state.popupMessage,
   };
@@ -255,5 +265,5 @@ export default connect(mapStateToProps, {
   setActivity,
   setConference,
   setPopupMessage,
-  setIsPresenting
+  setIsPresenting,
 })(RoomView);

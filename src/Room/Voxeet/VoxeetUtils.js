@@ -150,6 +150,23 @@ export const stopScreenShare = () => {
     .catch((e) => {console.log('Error in stoping screen' + e)});
 };
 
+// export const ConfigureSpatial = ()=>{
+//   [conference.participants].map((val) => {
+//     const participant = val[1];
+
+//     const videoTile = document.getElementByClass(`${participant.id}`);
+
+//     const elementPosition = videoTile.getBoundingClientRect();
+
+   
+//     conference.setSpatialPosition(participant, {
+//         x: elementPosition.x + (elementPosition.width / 2),
+//         y: elementPosition.y + (elementPosition.height / 2),
+//         z: 0
+//     });
+// });
+// }
+
 
   export {
     createConference,

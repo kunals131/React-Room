@@ -1,10 +1,13 @@
 const initialState = {
     mic : true,
     video : false,
+    dolbyVoice : true,
+    spatialAudio : true,
     screenShare : false,
     conference : 'null',
     voiceRecog : false,
     isPresenting : false,
+    
 
 }
 
@@ -27,6 +30,12 @@ export default (state = initialState, action)=>{
         }
         case 'SET_IS_PRESENTING' : return {
             ...state, isPresenting : action.payload,
+        }
+        case 'SET_DOLBY_VOICE' : return {
+            ...state, dolbyVoice : action.payload
+        }
+        case 'SET_SPATIAL_AUDIO' : return {
+            ...state, spatialAudio : action.payload
         }
         default : 
         return state;

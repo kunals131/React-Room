@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Header.scss";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { leaveConference } from "./Voxeet/VoxeetUtils";
+
 
 const Header = (props) => {
   const [logout, setLogout] = useState(false);
@@ -22,7 +22,7 @@ const Header = (props) => {
         <div className="next__header__content__user">
           <p className={`next__header__content__user-name`}>
             <i className="user icon"></i>{" "}
-            {props.user === "Guest" ? "Guest" : props.user.name}
+            {props.authStatus.isSignedin?props.authStatus.user.name:props.name}
           </p>
         </div>
         <div
@@ -37,8 +37,10 @@ const Header = (props) => {
   );
 };
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    user: state.authStatus.user || "Guest",
+    authStatus : state.authStatus,
+
   };
 };
 

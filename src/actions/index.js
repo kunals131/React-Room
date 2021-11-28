@@ -1,19 +1,11 @@
-export const setUser = (name)=>{
+export const tempAuth = (name)=>{
     return {
-        type : 'SET_USER',
+        type : 'SET_TEMP_AUTH',
         payload : name
-    };
-}
-
-
-
-export const setRole = (role)=>{
-    return {
-        type : 'SET_ROLE',
-        payload : role,
     }
-
 }
+
+
 
 export const setMic = (micState)=>{
     return {
@@ -82,5 +74,18 @@ export const setIsPresenting = (state)=>{
     return {
         type : 'SET_IS_PRESENTING',
         payload : state
+    }
+}
+
+export const setDolbyVoice = (state)=>{
+    return {
+        type : 'SET_DOLBY_VOICE',
+        payload : state,
+    }
+}
+export const setSpatialAudio = (state)=>{
+    return {
+        type : 'SET_SPATIAL_AUDIO',
+        payload : state,
     }
 }

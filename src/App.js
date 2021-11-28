@@ -11,6 +11,7 @@ import { auth, database, getUserWithId } from "./firebase/firebase.utils";
 import { signinUser, signoutUser, setLoadingState } from "./actions";
 import PrivateRoute from './PrivateRoute'
 import RoomView from "./Room/RoomView";
+import Room from "./Room/Room";
 import MeetEnded from "./SecondaryPages/MeetEnded";
 
 import { onAuthStateChanged } from "@firebase/auth";
@@ -61,7 +62,7 @@ const App = ({
           </Route>
           <Route path="/:roomid" exact>
             {/* {authStatus?<RoomView/>:<Redirect to="/authentication"/>} */}
-            <RoomView />
+            <Room authStatus={authStatus}/>
           </Route>
           <Route path="/:roomid/ended" exact><MeetEnded /></Route>
         </Switch>

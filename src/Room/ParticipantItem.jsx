@@ -15,8 +15,10 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
     const timer = setInterval(() => {
       conference.isSpeaking(participant.participant, (isSpeaking) => {
         if (isSpeaking) {
+          if (!speakingState){
           setSpeakingState(true);
-
+          }
+      
           // console.log('Eee')
         } else {
           setSpeakingState(false);
@@ -47,10 +49,10 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
   return (
     <>
       <style>{`.${participant.id}{border : ${
-        speakingState ? "5px solid lightgreen" : "none"
+        speakingState ? "4px solid lightgreen" : "none"
       }}`}</style>
       
-      <div className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
+      <div ref={ref} className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
         {isVideo ? (
           <video
             id="video-object"

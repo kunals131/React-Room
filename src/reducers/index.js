@@ -1,18 +1,19 @@
 import {combineReducers} from "redux"
-import userReducer from "./userReducer"
+
 import LoadingReducer from "./LoadingReducer"
-import roleReducer from "./roleReducer"
+
 import activityReducer from "./activityReducer"
 import authReducer from "./authReducer"
 import messageReducer from "./messageReducer"
 import videoControlsReducer from "./videoControlsReducer"
+import tempAuthReducer from "./tempAuthReducer"
 
 
 export default combineReducers({
-    user : userReducer,
-    role : roleReducer,
+
     authStatus : authReducer,
     isActive : activityReducer,
     controls : videoControlsReducer,
     popupMessage : messageReducer,
+    tempUser : tempAuthReducer
 })

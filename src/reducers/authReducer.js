@@ -1,5 +1,5 @@
 const initalState = {
-    isSignedin : null,
+    isSignedin : false,
     user : {
         id : Math.random()*1203232
     }
