@@ -136,6 +136,21 @@ export const fetchConference = async(id)=>{
   return conf;
 }
 
+export const startScreenShare = () => {
+  conference
+    .startScreenShare()
+    .then(() => {console.log('Screen Share Started!!')})
+    .catch((e) => {console.log('Error in starting Screeen + e')});
+};
+
+export const stopScreenShare = () => {
+  conference
+    .stopScreenShare()
+    .then(() => {return 'Screen Share stopped!'})
+    .catch((e) => {console.log('Error in stoping screen' + e)});
+};
+
+
   export {
     createConference,
     joinConference,

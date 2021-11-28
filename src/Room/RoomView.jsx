@@ -7,6 +7,7 @@ import {
   setLoadingState,
   setConference,
   setPopupMessage,
+  setIsPresenting
 } from "../actions";
 import ParticipantGrid from "./ParticipantGrid/ParticipantGrid";
 import Controller from "./Controller/Controller";
@@ -28,6 +29,8 @@ const RoomView = ({
   user,
   isSignin,
   setConference,
+  controls,
+  setIsPresenting,
   setPopupMessage,
   popupMessage,
 }) => {
@@ -78,7 +81,10 @@ const RoomView = ({
   const StreamUpdatedFunction = (participant, stream) => {
     console.log("STREAM UPDATED");
     fetchAndSetNames();
-    if (stream.type === "screen-share") return;
+    if (stream.type==='ScreenShare'){
+      setIsPresenting(true);
+    }
+    // if (stream.type === "screen-share") return;
     const index = participantList.findIndex((ele) => {
       return ele.id === participant.id;
     });
@@ -117,6 +123,9 @@ const RoomView = ({
   const streamRemovedFunction = (participant, stream) => {
     if (participant.status === "Left") return;
     console.log(stream);
+    if (stream.type==='ScreenShare') {
+      setIsPresenting(false);
+    }
 
     const index = participantList.findIndex((ele) => {
       return ele.id === participant.id;
@@ -136,7 +145,20 @@ const RoomView = ({
   };
 
   const participantUpdatedFunction = (participant, stream) => {
-    if (participant.status === "Left") return;
+    if (participant.status === "Left") {
+      for(let st of participant.streams) {
+        if (st.type==='ScreenShare') {
+          setIsPresenting(false);
+        }
+      }
+
+      const newParticipantList = [...participantList].filter((el)=>{
+        return el.id!==participant.id;
+      })
+      setParticipantList(newParticipantList);
+      setPopupMessage(`${participant.info.name} Left!`)
+    }
+    
 
     // const newParticipantList = [...participantList].filter((el) => {
     //   return el.id !== participant.id;
@@ -162,6 +184,7 @@ const RoomView = ({
   }, [participantList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    console.log(conference.participants)
     const timer = setInterval(() => {
       participantList.map((participant) => {
         conference.isSpeaking(participant.participant, (isSpeaking) => {
@@ -178,6 +201,7 @@ const RoomView = ({
     return () => {
       clearInterval(timer);
     };
+   
   }, []);
 
   useEffect(()=>{
@@ -198,7 +222,7 @@ const RoomView = ({
       ) : (
         <div className="roomview-container" style={bgStyle}>
           <Header id={conferenceId}></Header>
-          <ParticipantGrid participantList={participantList} />
+          <ParticipantGrid isPresenting={controls.isPresenting} isScreenShare={controls.screenShare} participantList={participantList} />
           <Controller conf={conferenceId} showSidebar={setSidebar}></Controller>
           {sidebar && (
             <Sidebar
@@ -231,4 +255,5 @@ export default connect(mapStateToProps, {
   setActivity,
   setConference,
   setPopupMessage,
+  setIsPresenting
 })(RoomView);

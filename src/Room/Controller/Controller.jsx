@@ -3,13 +3,16 @@ import { commands, cleanUp } from "../SmartPopup/smartFunctions";
 
 import { connect } from "react-redux";
 import "./Controller.scss";
-import { setMic, setVideo, setVoiceRecog, setPopupMessage } from "../../actions";
+import { setMic, setVideo, setVoiceRecog, setPopupMessage, setScreenShare } from "../../actions";
+import {conference} from '@voxeet/voxeet-web-sdk'
 import {
   startVideo,
   stopVideo,
   startAudio,
   stopAudio,
   leaveConference,
+  startScreenShare,
+  stopScreenShare,
 } from "../Voxeet/VoxeetUtils";
 import recognition from "../Speech";
 
@@ -25,7 +28,8 @@ const Controller = ({
   popupMessage,
   user,
   setVoiceRecog,
-  setPopupMessage
+  setPopupMessage,
+  setScreenShare
 }) => {
   const [Link, setLink] = useState(false);
   const [recog,setRecog] = useState(false); 
@@ -35,6 +39,7 @@ const Controller = ({
       return !prev;
     })
   }
+
 
   const controlVideo = async (state) => {
     setVideo(state);
@@ -47,6 +52,24 @@ const Controller = ({
     }
   };
 
+ 
+  const controlScreenShare = async(state)=>{
+
+    if (state) {
+      if (controls.isPresenting) {
+        setPopupMessage('Presentation is already going on!')
+        return;
+      }
+      setScreenShare(state);
+      await startScreenShare();
+      console.log('Screen share started!')
+    }
+    else {
+      setScreenShare(state);
+      await stopScreenShare();
+      console.log('screenshare stopped!')
+    }
+  }
   const controlMic = async (state) => {
     setMic(state);
     if (state === false) {
@@ -186,7 +209,7 @@ const Controller = ({
             ></i>
           </div>
 
-          <div className="controller__center-item">
+          <div className="controller__center-item" onClick={()=>controlScreenShare(!controls.screenShare)}>
             <i
               className={
                 controls.screenShare
@@ -236,5 +259,6 @@ export default connect(mapStateToProps, {
   setVideo,
   setMic,
   setPopupMessage,
-  setVoiceRecog
+  setVoiceRecog,
+  setScreenShare
 })(Controller);

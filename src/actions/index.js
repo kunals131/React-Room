@@ -77,3 +77,10 @@ export const setVoiceRecog = (state)=>{
         payload : state
     }
 }
+
+export const setIsPresenting = (state)=>{
+    return {
+        type : 'SET_IS_PRESENTING',
+        payload : state
+    }
+}
