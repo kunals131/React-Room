@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Home from "./Pages/Home/Home";
 import Header from "./components/Header/Header";
+import { useLocation } from "react-router";
 import { connect } from "react-redux";
 import Loader from "./components/Loader/Loader";
-
+import {AnimatePresence} from 'framer-motion'
 import AuthView from "./Pages/AuthView/AuthView";
 import StorageView from "./Pages/StorageView/StorageView";
 import { Switch, Route, Redirect } from "react-router-dom";
+import Home2 from "./Pages/Home/Home2";
 import { auth, database, getUserWithId } from "./firebase/firebase.utils";
 import { signinUser, signoutUser, setLoadingState } from "./actions";
 import PrivateRoute from './PrivateRoute'
@@ -22,7 +24,7 @@ const App = ({
   authStatus,
   isActive,
 }) => {
-
+  const location= useLocation();
   const [loading, setLoading] = useState(true);
   useEffect(() => setLoading(true), [])
   onAuthStateChanged(auth, (user) => {
@@ -50,9 +52,10 @@ const App = ({
     <>
       {!isActive && <Header />}
       {
-        <Switch>
+        <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
           <Route path="/" exact>
-            <Home />
+            <Home2/>
           </Route>
           <Route path="/authentication" exact>
             <AuthView />
@@ -66,6 +69,7 @@ const App = ({
           </Route>
           <Route path="/:roomid/ended" exact><MeetEnded /></Route>
         </Switch>
+        </AnimatePresence>
       }
     </>
   );

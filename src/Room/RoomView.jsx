@@ -60,7 +60,7 @@ const RoomView = ({
     const handleCreation = async () => {
       const Sname = isSignin?user.name:props.inputName;
       const Sid = isSignin?user.id:Math.floor(Math.random()*32323);
-      await createSession(Sid, Sname);
+      await createSession(Sname, Sid);
       console.log("Created session with id " + Sname);
       const conf = await createConference(params.roomid);
       console.log(conf);
@@ -73,7 +73,7 @@ const RoomView = ({
       
       setLoader(false);
     };
-    setTimeout(handleCreation, 2000)
+    handleCreation();
     
   }, []);
 
@@ -131,7 +131,7 @@ const RoomView = ({
   const streamRemovedFunction = (participant, stream) => {
     if (participant.status === "Left") return;
     console.log(stream);
-    if (stream.type === "ScreenShare") {
+    if (stream && stream.type === "ScreenShare") {
       setIsPresenting(false);
     }
 

@@ -1,5 +1,8 @@
 @import '../../index.scss';
 .header {
+    background-color: black;
+    height: 9vh;
+    border-bottom: 1px solid rgba($color: white, $alpha: 0.3);
     
     &__content {
         width: 80%;
@@ -7,6 +10,7 @@
         justify-content: space-between;
         margin: auto;
         padding: 1.9rem 0;
+
 
         
         &__logo {

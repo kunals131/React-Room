@@ -9,15 +9,12 @@ const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
 
 
-  const style = {
-    backgroundColor: props.backgroundColor,
-    // boxShadow: "1px 1px 30px 10px rgba(0,0,0,0.1)",
-  };
+
 
   return (
-    <header className="header" style={style}>
-      <div className="header__content">
-        <img src={Logo} alt="" className="header__content__logo" />
+    <header className="header" >
+      <div className="header__content" style={{color : 'white'}}>
+        React Room
         <div className="header__content__user" onClick={()=>setShowMenu(!showMenu)}>
           <img src={UserIcon} alt="" className="header__content__user-icon" />
           <p className={`header__content__user-name${showMenu&&' activez'}`}>{props.name}</p>
