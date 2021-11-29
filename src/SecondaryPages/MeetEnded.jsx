@@ -5,6 +5,7 @@ import {Link, useParams} from 'react-router-dom'
 import './MeetEnded.scss'
 import { leaveConference } from '../Room/Voxeet/VoxeetUtils'
 import { setActivity } from '../actions'
+import recognition from '../Room/Speech'
 
 
 
@@ -16,6 +17,10 @@ const MeetEnded = () => {
         console.log(params.roomid)
         console.log('Meet Ended')
         setActivity(false);
+        recognition.stop();
+        recognition.onend = () => {
+            console.log('STOPED!!')
+        }
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <div className='meet-ended-container'>

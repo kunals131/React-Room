@@ -187,7 +187,7 @@ const Controller = ({
     setVoiceRecog(state);
 
     if (state) {
-      setPopup("Listening...");
+      setPopup("SAY 'HELP ME'");
       if (!recog) {
         recognition.start();
       }
