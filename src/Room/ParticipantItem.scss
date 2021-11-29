@@ -13,9 +13,8 @@ $dark-color : #3F3D56;
     border-radius: 0.33rem;
     transition: all 0.1s ease-in;
 
-    &:hover {
-
-    }
+    
+    
     background-attachment: white;
     background: linear-gradient(
         0deg,
@@ -40,4 +39,39 @@ $dark-color : #3F3D56;
 .screenshared {
     width: 12rem;
     height: 12rem;
+    &:hover {
+        &::after {
+            content: attr(name);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 4px;
+            font-size: 1rem;
+            height: 12rem;
+            background-color: rgba(#6C63FF, $alpha: 0.6);
+            position: absolute;
+
+            width: 12rem;
+        }
+    }
+}
+
+.nonshared {
+    &:hover {
+        &::after {
+            content: attr(name);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 4px;
+            font-size: 1rem;
+            height: 20rem;
+            background-color: rgba(#6C63FF, $alpha: 0.6);
+            position: absolute;
+
+            width: 20rem;
+        }
+    }
 }

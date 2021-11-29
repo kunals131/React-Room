@@ -65,7 +65,7 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
         speakingState ? "4px solid lightgreen" : "none"
       }}`}</style>
       
-      <motion.div  variants={participantVariant} initial="hidden" animate="visible" className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
+      <motion.div name={participant.name} width={(controls.screenShare || controls.isPresenting)?'12rem':'20rem'}  variants={participantVariant} initial="hidden" animate="visible" className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':'nonshared'}`} ref={ref}>
         {isVideo ? (
           <video
             id="video-object"
