@@ -199,6 +199,7 @@ const Controller = ({
         </div>
         <div className="controller__center">
           <div
+          title="Video Camera"
             className="controller__center-item"
             onClick={() => controlVideo(!controls.video)}
           >
@@ -206,7 +207,7 @@ const Controller = ({
               className={controls.video ? "fas fa-video" : "fas fa-video-slash"}
             ></i>
           </div>
-          <div
+          <div title="Microphone"
             className="controller__center-item"
             onClick={() => controlMic(!controls.mic)}
           >
@@ -217,31 +218,31 @@ const Controller = ({
             ></i>
           </div>
 
-          <div className="controller__center-item" onClick={()=>controlScreenShare(!controls.screenShare)}>
+          <div title="Screen Share" className="controller__center-item" onClick={()=>controlScreenShare(!controls.screenShare)}>
             <i
               className={
                 controls.screenShare
                   ? "fas fa-window-maximize"
-                  : "fas fa-window-close"
+                  : "bi bi-arrow-up-square-fill"
               }
             ></i>
           </div>
   
         </div>
         <div className="controller__right">
-          <div
+          <div title="Menu"
             className="controller__center-item controlbtn" onClick={handleSidebar}
           >
             <i className="fab fa-ethereum"></i>
           </div>
           <div
-            className="controller__center-item controlbtn" onClick={() => controlVoiceRecog(!controls.voiceRecog)}
+            title="Voice Controls" className="controller__center-item controlbtn" onClick={() => controlVoiceRecog(!controls.voiceRecog)}
           >
-           <i title="Mic (Turn Off the Mic/ Mute me) Video (Turn On the Video /Dont Show Me )" 
+           <i 
               className={
                 controls.voiceRecog 
                   ? "fab fa-teamspeak"
-                  : "far fa-play-circle"
+                  : "bi bi-robot"
               }
 
             ></i>
