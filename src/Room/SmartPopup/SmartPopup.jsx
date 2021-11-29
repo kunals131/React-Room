@@ -5,7 +5,7 @@ const SmartPopup = (props) => {
     return (
         <div className="popup">
             <div className="popup__content">
-            <div className="popup__content__heading">Dolby Room</div>
+            <div className="popup__content__heading">React Room</div>
             <p className="popup__content__sub">{props.text}</p>
             </div>
         </div>
