@@ -3,6 +3,19 @@ import "./ParticipantItem.scss";
 import { connect } from "react-redux";
 
 import { conference } from "@voxeet/voxeet-web-sdk";
+import { motion } from "framer-motion";
+
+const participantVariant = {
+  hidden : {
+    x : '300',
+    opacity : 0,
+  },
+  visible : {
+    x : 0,
+    opacity : 1,
+  
+  }
+}
 
 const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
   const ref = useRef();
@@ -52,7 +65,7 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
         speakingState ? "4px solid lightgreen" : "none"
       }}`}</style>
       
-      <div  className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
+      <motion.div  variants={participantVariant} initial="hidden" animate="visible" className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
         {isVideo ? (
           <video
             id="video-object"
@@ -66,7 +79,7 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
         ) : (
           <i className="fas fa-video-slash" />
         )}
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -1,6 +1,36 @@
 import React, {useRef} from "react";
 import "./ParticipantGrid.scss";
 import ParticipantItem from "../ParticipantItem";
+import { motion } from "framer-motion";
+
+const screenShareVariant = {
+  hidden : {
+    y : 200,
+    opacity : 0
+  },
+  visible : {
+    y : 0,
+    opacity : 1,
+    transition : {
+      duration : 0.5
+    }
+  }
+}
+
+const participantVariant = {
+  hidden : {
+    y : -200,
+    opacity : 0,
+  },
+  visible : {
+    y : 0,
+    opacity : 1,
+    transition : {
+      duration : 0.5
+    }
+  }
+}
+
 const ParticipantGrid = (props) => {
   const screenShareRef = useRef();
   const len = props.participantList.length;
@@ -31,7 +61,7 @@ const ParticipantGrid = (props) => {
             </div>
           ) : (
             <div className="pg__container-2">
-              <div className="pg__container-2-screenshare">
+              <motion.div variants={screenShareVariant} exit='hidden' animate='visible' initial='hidden' className="pg__container-2-screenshare">
                 {
                   <video
                     id="video-object"
@@ -47,8 +77,8 @@ const ParticipantGrid = (props) => {
                     muted
                   />
                 }
-              </div>
-              <div className="pg__container-2-participants">
+              </motion.div>
+              <motion.div variants={participantVariant} exit='hidden' animate='visible' initial='hidden' className="pg__container-2-participants">
               {props.participantList.map((participant) => {
                 return (
                   <ParticipantItem
@@ -59,7 +89,7 @@ const ParticipantGrid = (props) => {
                   />
                 );
               })}
-              </div>
+              </motion.div>
             </div>
           )}
         </div>
