@@ -48,9 +48,9 @@ const Sidebar = ({ participantList, setBackground}) => {
                 {
                     view==='Participants'&&<div className="sb__container__items">
                     {
-                        participantList.map(name=>{
+                        participantList.map(p=>{
                             return <div className="sb__container__items-item">
-                                {name}
+                                {p.name}
                             </div>
                         })
                     }

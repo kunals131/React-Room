@@ -236,7 +236,7 @@ const RoomView = ({
           {sidebar && (
             <Sidebar
               setBackground={setBackground}
-              participantList={participantNameList}
+              participantList={participantList}
             />
           )}
           {popupMessage && (
