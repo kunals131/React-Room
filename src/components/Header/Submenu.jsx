@@ -16,12 +16,6 @@ const Submenu = ({isSignedin}) => {
         {
           isSignedin?(
         <>
-        <Link to="/floors" class="item">
-          <div class="ui label">51</div>Floors
-        </Link>
-        <Link  class="item" to="/">
-        Create Instant Meeting
-        </Link>
         <div  class="item" onClick={handleLogout}>
           Logout
         </div>

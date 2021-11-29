@@ -25,7 +25,7 @@ const MeetEnded = () => {
             <div className="button">
             <Button variant="outlined" style={{borderColor : 'darkgrey',width : '120px', marginTop : '1rem', fontSize : '1.3rem'}} ><Link style={{color : 'black'}} to="/">Home</Link></Button>
             <div className="button-2">
-            <Button variant="outlined" style={{borderColor : 'darkgrey',width : '500px', marginTop : '1rem', fontSize : '1.3rem'}} ><Link style={{color : 'black'}} to={`/${roomPrev}`}>Join Previous Room Again!</Link></Button>
+            <Button variant="outlined" style={{borderColor : 'darkgrey',width : '500px', marginTop : '1rem', fontSize : '1.3rem'}} ><Link style={{color : 'black'}} to={`/room/${roomPrev}`}>Join Previous Room Again!</Link></Button>
             </div>
                 
             </div>

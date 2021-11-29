@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 import { setActivity } from "../../actions";
 import { connect } from "react-redux";
 
-import AssetImage from '../../assets/undrawAssets.svg'
+
 
 const InputVariant = {
   hidden: {
@@ -83,7 +83,7 @@ const Home2 = ({ setActivity }) => {
   };
   const handleCreate = () => {
     const id = Math.floor(Math.random() * 21244343);
-    routeChange(`/${id}`);
+    routeChange(`/room/${id}`);
   };
 
   const [showLabel, setShowLabel] = useState(false);
@@ -92,23 +92,10 @@ const Home2 = ({ setActivity }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = input;
-    routeChange(`/${id}`);
+    routeChange(`/room/${id}`);
   };
 
-  //   <motion.div
-  //   animate={{
-  //     color: ["#0af", "#6C63FF", "#f4233f", "rgba(276,276,276,0.4)"],
-  //   }}
-  //   transition={{
-  //     duration: 5,
-  //     type: "spring",
-  //     stiffness: 200,
-  //     damping: 17,
-  //     repeat: Infinity,
-  //     repeatType: "reverse",
-  //   }}
-  //   className="Home__texts-heading"
-  // >
+  
   return (
     <motion.div  variants={MainDivVariant} animate='visible' initial='hidden' className="Home">
       <div className="Home__container">
@@ -131,7 +118,7 @@ const Home2 = ({ setActivity }) => {
         </div>
         <div className="Home__right">
           <div className="Home__right-img">
-            <img src={AssetImage} className='Home__right-img-main' alt="" />
+            <img src={'https://res.cloudinary.com/insight-byte/image/upload/v1638184794/undrawAssets_g4w3xm.svg'} className='Home__right-img-main' alt="" />
           </div>
         </div>
       </div>

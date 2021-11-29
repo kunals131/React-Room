@@ -16,8 +16,8 @@ const Header = (props) => {
       <div className="header__content" style={{color : 'white'}}>
         React Room
         <div className="header__content__user" onClick={()=>setShowMenu(!showMenu)}>
-          <img src={UserIcon} alt="" className="header__content__user-icon" />
-          <p className={`header__content__user-name${showMenu&&' activez'}`}>{props.name}</p>
+         
+          <p className={`header__content__user-name${showMenu&&' activez'}`}><i className="user icon"></i>{' '}{props.name}</p>
         </div>
       </div>
 

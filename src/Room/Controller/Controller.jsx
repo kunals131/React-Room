@@ -83,7 +83,7 @@ const Controller = ({
 
   const copyLink = ()=>{
     let url = window.location.origin;
-    url+=`/${conf}`;
+    url+=`/room/${conf}`;
     let text= `${user} has invited to join Dolby Room : ${url}`
     navigator.clipboard.writeText(text);
     setLink(true);

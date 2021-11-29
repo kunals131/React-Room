@@ -58,16 +58,16 @@ const App = ({
             <Home2/>
           </Route>
           <Route path="/authentication" exact>
-            <AuthView />
+          {!authStatus?<AuthView/>:<Redirect to="/"/>}
           </Route>
           <Route path="/Storage" exact>
             {authStatus ? <StorageView /> : <Redirect to="/authentication" />}
           </Route>
-          <Route path="/:roomid" exact>
+          <Route path="/room/:roomid" exact>
             {/* {authStatus?<RoomView/>:<Redirect to="/authentication"/>} */}
             <Room authStatus={authStatus}/>
           </Route>
-          <Route path="/:roomid/ended" exact><MeetEnded /></Route>
+          <Route path="/room/:roomid/ended" exact><MeetEnded /></Route>
         </Switch>
         </AnimatePresence>
       }
