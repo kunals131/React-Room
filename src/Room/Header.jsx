@@ -30,7 +30,7 @@ const Header = (props) => {
           onClick={() => setLogout(true)}
         >
           <i className="sign out alternate icon" />
-          Leave Class
+          Leave Room
         </div>
       </div>
     </header>

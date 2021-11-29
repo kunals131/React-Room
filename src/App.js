@@ -33,6 +33,7 @@ const App = ({
         signinUser(res);
         setLoading(false)
         console.log("status updated to signedin ");
+        console.log(res);
 
       });
 

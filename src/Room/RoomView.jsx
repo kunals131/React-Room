@@ -26,10 +26,10 @@ import {
 
 const RoomView = ({
   setActivity,
-  user,
-  isSignin,
+
   setConference,
   controls,
+  authStatus,
   setIsPresenting,
   setPopupMessage,
   tempUser,
@@ -38,7 +38,7 @@ const RoomView = ({
   const [sidebar, setSidebar] = useState(false);
   const [loader, setLoader] = useState(true);
   const [participantList, setParticipantList] = useState([]);
-
+ 
   
   const [conferenceId, setConferenceId] = useState("");
   const [background, setBackground] = useState("black");
@@ -57,8 +57,8 @@ const RoomView = ({
 
   useEffect(() => {
     const handleCreation = async () => {
-      const Sname = isSignin?user.name:props.inputName;
-      const Sid = isSignin?user.id:Math.floor(Math.random()*32323);
+      const Sname = authStatus.isSignedin?authStatus.user.name:props.inputName;
+      const Sid = authStatus.isSignedin?authStatus.user.id:Math.floor(Math.random()*32323);
       await createSession(Sname, Sid);
       console.log("Created session with id " + Sname);
       const conf = await createConference(params.roomid);
@@ -124,6 +124,7 @@ const RoomView = ({
   const streamRemovedFunction = (participant, stream) => {
     if (participant.status === "Left") return;
     console.log(stream);
+
     if (stream && stream.type === "ScreenShare") {
       setIsPresenting(false);
     }
@@ -158,7 +159,10 @@ const RoomView = ({
       });
       setParticipantList(newParticipantList);
       setPopupMessage(`${participant.info.name} Left!`);
+      return;
     }
+    setPopupMessage(`${participant.info.name} Joined!`);
+
 
     // const newParticipantList = [...participantList].filter((el) => {
     //   return el.id !== participant.id;
@@ -244,12 +248,12 @@ const RoomView = ({
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     controls: state.controls,
     isActive: state.isActive,
-    user: state.authStatus.user,
     tempUser : state.tempUser,
-    isSignin: state.authStatus.isSignin,
+    authStatus : state.authStatus,
     popupMessage: state.popupMessage,
   };
 };
