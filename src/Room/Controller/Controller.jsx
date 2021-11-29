@@ -117,6 +117,15 @@ const Controller = ({
          controlVoiceRecog(false);
          return true;
       }
+      case 'START_SCREEN_SHARE' : {
+        await controlScreenShare(true)
+        return true;
+      }
+      case 'STOP_SCREEN_SHARE' : {
+        await controls(false);
+        return true;
+      }
+
       default : return false;
     }
   }

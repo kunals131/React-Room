@@ -1,35 +1,36 @@
 export const commands = [
     {
-        match : ['MUTEME', 'TURNMICOFF', 'MUTEME'],
+        match : ['TURNOFFMYMIC', 'TURNMICOFF', 'TURNMYMICOFF', 'STOPMYMIC'],
         task : 'TURN_OFF_MIC'
     },
     {
-        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONMYEMIC'],
+        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONMYEMIC', 'STARTMYMIC'],
         task : 'TURN_ON_MIC'
     }, 
     {
-        match : ['TURNONVIDEO', 'TURNONTHEVIDEO'],
+        match : ['TURNONVIDEO', 'TURNONTHEVIDEO', 'TURNONMYVIDEO', 'STARTMYVIDEO', 'STARTHEVIDEO'],
         task : 'TURN_ON_VIDEO'
     }, 
     {
-        match : ['SHUTVIDEO', 'DONTSHOWME', "TURNOFFTHEVIDEO", 'TURNOFFMYVIDEO', ],
+        match : [ "TURNOFFTHEVIDEO", 'TURNOFFMYVIDEO','STOPTHEVIDEO', 'STOPMYVIDEO' ],
         task : 'TURN_OFF_VIDEO'
     },
+
     {
-        match : ['SWITCHTHEMETO', 'CHANGETHEMETO']
+        match : ['STARTMYSCREENSHARE', 'TURNONMYSCREENSHARE', 'SHAREMYSCREEN'],
+        task :'START_SCREEN_SHARE'
     },
     {
-        match : ['COUNTPARTICIPANTS', 'HOWMANYPARTICIAPNTSARETHERE']
-    },
-    {
-        match : ['KICKOUT']
-    },
-    {
-        match : ['STARTMYSCREENSHARE', 'TURNONMYSCREENSHARE']
+        match : ['STOPMYSCREENSHARE', 'TURNOFFMYSCREENSHARE'],
+        task :'STOP_SCREEN_SHARE'
     },
     {
         match : ['GOODBYE', 'GOAWAY', 'STOPVOICERECOGNIZATION', 'GOAWAY'],
         task : 'STOP_VOICE_RECOG'
+    },
+    {
+        match : ['TAKEMETOTHE'],
+        task : 'CHANGE_THEME'
     }
     
 
