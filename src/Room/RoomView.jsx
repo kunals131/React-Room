@@ -161,7 +161,7 @@ const RoomView = ({
       setPopupMessage(`${participant.info.name} Left!`);
       return;
     }
-    setPopupMessage(`${participant.info.name} Joined!`);
+   
 
 
     // const newParticipantList = [...participantList].filter((el) => {
@@ -175,6 +175,7 @@ const RoomView = ({
     conference.on("streamAdded", StreamUpdatedFunction);
     conference.on("streamUpdated", StreamUpdatedFunction);
     conference.on("streamRemoved", streamRemovedFunction);
+    conference.on("participantAdded", (participant, stream)=>setPopupMessage(`${participant.info.name} Joined!`))
     conference.on("participantUpdated", participantUpdatedFunction);
     conference.on("left", () => console.log("conference left"));
     notification.on("participantLeft", () => {
