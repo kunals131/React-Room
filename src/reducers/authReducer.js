@@ -5,7 +5,7 @@ const initalState = {
     }
 }
 
-export default (state=initalState,action) => {
+const authReducer =  (state=initalState,action) => {
     switch(action.type) {
         case 'SIGNIN_USER' : return {
             user : action.payload,
@@ -21,3 +21,4 @@ export default (state=initalState,action) => {
     }
     
 }
+export default authReducer

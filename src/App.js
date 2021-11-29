@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Pages/Home/Home";
+
 import Header from "./components/Header/Header";
 import { useLocation } from "react-router";
 import { connect } from "react-redux";
 import Loader from "./components/Loader/Loader";
 import {AnimatePresence} from 'framer-motion'
 import AuthView from "./Pages/AuthView/AuthView";
-import StorageView from "./Pages/StorageView/StorageView";
+
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home2 from "./Pages/Home/Home2";
-import { auth, database, getUserWithId } from "./firebase/firebase.utils";
-import { signinUser, signoutUser, setLoadingState } from "./actions";
-import PrivateRoute from './PrivateRoute'
-import RoomView from "./Room/RoomView";
+import { auth, getUserWithId } from "./firebase/firebase.utils";
+import { signinUser, signoutUser, } from "./actions";
+
 import Room from "./Room/Room";
 import MeetEnded from "./SecondaryPages/MeetEnded";
 
 import { onAuthStateChanged } from "@firebase/auth";
-import { doc, getDoc } from "@firebase/firestore";
+
 const App = ({
   signinUser,
   signoutUser,
@@ -59,9 +58,6 @@ const App = ({
           </Route>
           <Route path="/authentication" exact>
           {!authStatus?<AuthView/>:<Redirect to="/"/>}
-          </Route>
-          <Route path="/Storage" exact>
-            {authStatus ? <StorageView /> : <Redirect to="/authentication" />}
           </Route>
           <Route path="/room/:roomid" exact>
             {/* {authStatus?<RoomView/>:<Redirect to="/authentication"/>} */}

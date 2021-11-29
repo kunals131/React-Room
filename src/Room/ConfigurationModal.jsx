@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import {Button, TextField} from '@mui/material';
 import { connect } from 'react-redux';
@@ -19,12 +19,9 @@ const buttonStyle = {
     width : '150px'
 }
 
-const checkboxStyle = {
-    color: 'black',
-   }
 
 const ConfigurationModal = ({tempAuth, setAuth, ...props}) => {
-    const [input, setInput] = useState('');
+
     const handleSubmit = ()=> {
         if (!props.inputName.length) {
             alert('Please Enter a valid Full Name!')

@@ -4,13 +4,12 @@ import { commands, cleanUp } from "../SmartPopup/smartFunctions";
 import { connect } from "react-redux";
 import "./Controller.scss";
 import { setMic, setVideo, setVoiceRecog, setPopupMessage, setScreenShare } from "../../actions";
-import {conference} from '@voxeet/voxeet-web-sdk'
+
 import {
   startVideo,
   stopVideo,
   startAudio,
   stopAudio,
-  leaveConference,
   startScreenShare,
   stopScreenShare,
 } from "../Voxeet/VoxeetUtils";

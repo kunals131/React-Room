@@ -11,7 +11,7 @@ const initialState = {
 
 }
 
-export default (state = initialState, action)=>{
+const videoControlsReducer =  (state = initialState, action)=>{
     switch(action.type) {
         case 'SET_MIC_STATE' : return {
             ...state, mic : action.payload
@@ -41,3 +41,5 @@ export default (state = initialState, action)=>{
         return state;
     }
 }
+
+export default  videoControlsReducer;

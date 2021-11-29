@@ -1,7 +1,5 @@
 import {combineReducers} from "redux"
 
-import LoadingReducer from "./LoadingReducer"
-
 import activityReducer from "./activityReducer"
 import authReducer from "./authReducer"
 import messageReducer from "./messageReducer"

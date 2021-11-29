@@ -11,7 +11,7 @@ const Header = (props) => {
     return (
       <Redirect
         to={{
-          pathname: `/${props.id}/ended`,
+          pathname: `/room/${props.id}/ended`,
           state: { id: "123" },
         }}
       />

@@ -1,8 +1,8 @@
 
 import { initializeApp } from "firebase/app";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth';
-import { getFirestore, collection, addDoc, setDoc, doc, getDoc, updateDoc } from "firebase/firestore"
-import { getDatabase } from "firebase/database";
+import { getFirestore,  setDoc, doc, getDoc, } from "firebase/firestore"
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBR8aU2hvBx36igR-oxdss9-dfnoFm7PUo",
@@ -30,7 +30,7 @@ const AddUserToDatabase = async (user,fullname)=>{
         hosts : [],
     }
    
-    const docRef = await setDoc(doc(database,"users", user.uid), userObject);
+   await setDoc(doc(database,"users", user.uid), userObject);
     return userObject;
 }
 

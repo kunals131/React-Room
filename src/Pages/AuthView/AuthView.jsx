@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import "./AuthView.scss";
 import { Button } from "@mui/material";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
+
 import { TextField } from "@mui/material";
-import { ButtonStyles, textFieldStyles, ButtonStyles2 } from "./styles";
+import { ButtonStyles, textFieldStyles, } from "./styles";
 import { createUser, loginUser } from "../../firebase/firebase.utils";
 import { signinUser, signoutUser } from "../../actions";
 import { connect } from "react-redux";
-import { database } from "../../firebase/firebase.utils";
-import { collection, getDoc, doc } from "firebase/firestore"; 
-import { getUserWithId } from "../../firebase/firebase.utils";
-import { onAuthStateChanged } from "@firebase/auth";
+
 
 const AuthView = ({signinUser, signoutUser, authStatus}) => {
   const [isLogin, setIsLogin] = useState(true);

@@ -1,4 +1,4 @@
-export default (state={user : null, id:null}, action)=>{
+const  tempAuthReducer=(state={user : null, id:null}, action)=>{
     switch(action.type) {
         case 'SET_TEMP_AUTH' : return {
             user : action.payload,
@@ -7,3 +7,5 @@ export default (state={user : null, id:null}, action)=>{
         default : return state;
     }
 }
+
+export default  tempAuthReducer

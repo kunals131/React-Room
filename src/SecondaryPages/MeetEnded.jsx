@@ -16,7 +16,7 @@ const MeetEnded = () => {
         console.log(params.roomid)
         console.log('Meet Ended')
         setActivity(false);
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <div className='meet-ended-container'>
             <div className="content-meetend">

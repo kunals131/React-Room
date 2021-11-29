@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import {
   setActivity,
-  setLoadingState,
   setConference,
   setPopupMessage,
   setIsPresenting,
@@ -16,13 +15,13 @@ import Loader from "../components/Loader/Loader";
 import Sidebar from "./Sidebar/Sidebar";
 import { conference, session, notification } from "@voxeet/voxeet-web-sdk";
 import SmartPopup from "./SmartPopup/SmartPopup";
-import ConfigurationModal from "./ConfigurationModal";
+
 
 import {
   createConference,
   createSession,
   joinConference,
-  leaveConference,
+
 } from "./Voxeet/VoxeetUtils";
 
 const RoomView = ({
@@ -39,8 +38,8 @@ const RoomView = ({
   const [sidebar, setSidebar] = useState(false);
   const [loader, setLoader] = useState(true);
   const [participantList, setParticipantList] = useState([]);
-  const [participantNameList, setParticipantNameList] = useState([]);
-  const [Host, setHost] = useState({});
+
+  
   const [conferenceId, setConferenceId] = useState("");
   const [background, setBackground] = useState("black");
 
@@ -54,7 +53,7 @@ const RoomView = ({
   const params = new useParams();
   useEffect(() => {
     setActivity(true);
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const handleCreation = async () => {
@@ -69,26 +68,20 @@ const RoomView = ({
       const joinConf ={audio : true, dolbyVoice : true}
       setConferenceId(params.roomid);
       const join = await joinConference(conf, joinConf);
+      console.log(join)
       console.log("Joined Conference!");
       
       setLoader(false);
     };
     handleCreation();
     
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const fetchAndSetNames = async () => {
-    const conf = await conference.fetch(conferenceId);
-    let namelist = [];
-    conf.participants.forEach((participant) => {
-      namelist.push(participant.info.name);
-    });
-    setParticipantNameList(namelist);
-  };
+
 
   const StreamUpdatedFunction = (participant, stream) => {
     console.log("STREAM UPDATED");
-    fetchAndSetNames();
+ 
     if (stream.type === "ScreenShare") {
       setIsPresenting(true);
     }
@@ -192,25 +185,25 @@ const RoomView = ({
     };
   }, [participantList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    console.log(conference.participants);
-    const timer = setInterval(() => {
-      participantList.map((participant) => {
-        conference.isSpeaking(participant.participant, (isSpeaking) => {
-          if (isSpeaking) {
-            const newList = participantList.filter(
-              (par) => par.id !== participant.id
-            );
-            let listToBeAdded = [participant, ...newList];
-            setParticipantList(listToBeAdded);
-          }
-        });
-      });
-    }, 500);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log(conference.participants);
+  //   const timer = setInterval(() => {
+  //     participantList.map((participant) => {
+  //       conference.isSpeaking(participant.participant, (isSpeaking) => {
+  //         if (isSpeaking) {
+  //           const newList = participantList.filter(
+  //             (par) => par.id !== participant.id
+  //           );
+  //           let listToBeAdded = [participant, ...newList];
+  //           setParticipantList(listToBeAdded);
+  //         }
+  //       });
+  //     });
+  //   }, 500);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (popupMessage !== "") {
@@ -218,7 +211,7 @@ const RoomView = ({
         setPopupMessage("");
       }, 2000);
     }
-  }, [popupMessage]);
+  }, [popupMessage]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import "./ParticipantItem.scss";
 import { connect } from "react-redux";
-import recognition from "./Speech";
+
 import { conference } from "@voxeet/voxeet-web-sdk";
 
 const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
   const ref = useRef();
   const { id, stream, isVideo } = participant;
   const videoRef = useRef();
-  const [isCamera, setIsCamera] = useState(false);
+
   const [speakingState, setSpeakingState] = useState(false);
 
   useEffect(() => {
@@ -29,22 +29,22 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   const setupVideo = useCallback(({ stream }) => {
     if (stream.type==='ScreenShare' && (controls.screenShare || controls.isPresenting)) {
       navigator.attachMediaStream(props.screenShareRef.current, stream);
       return;
     }
     navigator.attachMediaStream(videoRef.current, stream);
-    setIsCamera(true);
-  }, []);
+
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // watcher for stream
   useEffect(() => {
     if (isVideo) {
       setupVideo({ stream });
     }
-  }, [isVideo, stream, ref, id, setupVideo]);
+  }, [isVideo, stream, ref, id, setupVideo])// eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -52,7 +52,7 @@ const ParticipantItem = ({ participant, isSelf, controls,...props }) => {
         speakingState ? "4px solid lightgreen" : "none"
       }}`}</style>
       
-      <div ref={ref} className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
+      <div  className={`participantItem ${participant.id} ${(controls.screenShare || controls.isPresenting)?'screenshared':''}`} ref={ref}>
         {isVideo ? (
           <video
             id="video-object"

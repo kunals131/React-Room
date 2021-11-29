@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Header.scss";
-import Logo from "../../assets/Logo.svg";
-import UserIcon from "../../assets/usericon.svg";
+
 import Submenu from "./Submenu";
 import { connect } from "react-redux";
 
