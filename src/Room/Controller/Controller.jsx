@@ -255,7 +255,7 @@ const Controller = ({
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return {
     controls: state.controls,
     user : 'kunal',
