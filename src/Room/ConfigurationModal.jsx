@@ -4,6 +4,7 @@ import {Button, TextField} from '@mui/material';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import { tempAuth } from '../actions';
+import {motion} from 'framer-motion'
 
 
 import './ConfigurationModal.scss'
@@ -17,6 +18,18 @@ const buttonStyle = {
         boxShadow: 'none',
       },
     width : '150px'
+}
+
+const modalVariant = {
+    hidden : {
+        opacity : 0,
+        y : '-50vh',
+    },
+    visible : {
+        opacity : 1,
+        y : 0,
+    }
+
 }
 
 
@@ -33,7 +46,7 @@ const ConfigurationModal = ({tempAuth, setAuth, ...props}) => {
     }
     return (
         <div className="backdrop">
-            <div className="modal">
+            <motion.div variants={modalVariant} exit='hidden' animate='visible' initial='hidden' className="modal">
                 <div className="modal__heading">You are not Logged in!</div>
                 <div className="modal__part-1">
                
@@ -46,7 +59,7 @@ const ConfigurationModal = ({tempAuth, setAuth, ...props}) => {
                 <p className="foot-text-modal">or Navigate to  <Link to="/authentication">Login Page</Link></p>
                 </div>
            
-            </div>
+            </motion.div>
         </div>
     )
 }
