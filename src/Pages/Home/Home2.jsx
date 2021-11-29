@@ -7,6 +7,7 @@ import { setActivity } from "../../actions";
 import { connect } from "react-redux";
 
 import AssetImage from '../../assets/undrawAssets.svg'
+
 const InputVariant = {
   hidden: {
     opacity: 0,
@@ -23,19 +24,36 @@ const InputVariant = {
   },
 };
 
+
+const labelVariant= {
+  hidden :{
+    opacity : 0,
+    x : -150
+  },
+  visible :  {
+    opacity : 1,
+    x : 0,
+    transition : {
+      type : 'spring',
+      duration : 1,
+      delay : 1
+    } 
+  }
+}
+
 const MainDivVariant = {
   exit: {
     x: "-100vw",
   },
   hidden: {
-    x: "100vw",
-    opacity: 0,
+    opacity : 0,
   },
   visible: {
     x: 0,
     opacity: 1,
     transition: {
       duration: 0.5,
+      staggar : 1
     },
   },
 };
@@ -53,6 +71,8 @@ const AnimateHeading = {
         }
   }
 }
+
+
 
 const Home2 = ({ setActivity }) => {
   const history = useHistory();
@@ -90,7 +110,7 @@ const Home2 = ({ setActivity }) => {
   //   className="Home__texts-heading"
   // >
   return (
-    <div className="Home">
+    <motion.div  variants={MainDivVariant} animate='visible' initial='hidden' className="Home">
       <div className="Home__container">
         <div className="Home__left">
           <div className="Home__left__text-part">
@@ -100,12 +120,14 @@ const Home2 = ({ setActivity }) => {
             </div>
           </div>
           <div className="Home__left-buttons">
-            <button className="Home__left-buttons-1">Create  Meeting</button>
-            <button className="Home__left-buttons-2">Join  Meeting</button>
+            <button onClick={handleCreate} className="Home__left-buttons-1">Create  Meeting</button>
+            <button onClick={()=>setJoin(!join)} className="Home__left-buttons-2">Join  Meeting</button>
           </div>
-          <div className="Home__left-input">
-            <input type="text" value="value" />
-          </div>
+          <form onSubmit={handleSubmit} className="Home__left-input">
+           { showLabel&&<motion.label  animate={{x : 0,opacity : 1}} initial={{x : -150, opacity : 0}} transition = {{type : 'spring', duration : 1}}  className="Home__left-label" htmlFor="id">Enter Join Id</motion.label>}
+
+            {join&&<motion.input variants={InputVariant} exit='hidden' animate='visible' initial='hidden' onFocus={()=>setShowLabel(true)} onBlur={()=>setShowLabel(false)} type="text" value={input} id="id" onChange={(e)=>setInput(e.target.value)} />}
+          </form>
         </div>
         <div className="Home__right">
           <div className="Home__right-img">
@@ -115,7 +137,7 @@ const Home2 = ({ setActivity }) => {
       </div>
       <div className="square-Home"></div>
 
-    </div>
+    </motion.div>
   );
 };
 

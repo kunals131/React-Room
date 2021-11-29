@@ -1,6 +1,7 @@
 @import "../../index.scss";
 
 .authview {
+  
   .authview__container {
     width: 40%;
     margin: auto;
@@ -13,7 +14,7 @@
     align-items: center;
     cursor: pointer;
 
-    background-color: $primary-color-less;
+    background-color: white;
     border-radius: 10px;
     &__item {
         font-size: 1.2rem;
@@ -31,7 +32,7 @@
   &__content {
       margin-top: 2rem;
       border-radius: 10px;
-      background-color: $primary-color-less-2;
+      background-color:white;
       &__login {
           &__form {
           display: flex;
@@ -49,4 +50,9 @@
     border-radius: 10px;
     color: white;
     cursor: pointer;
+}
+
+.main-div-auth {
+  background: #2f2e41;
+  height: 91vh;
 }

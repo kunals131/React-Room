@@ -59,8 +59,8 @@ const AuthView = ({signinUser, signoutUser, authStatus}) => {
 
 
   return (
-    <>
-      <div className="authview" style={isLogin?{marginTop:'7rem'}:{marginTop:'2rem'}}>
+    <div className='main-div-auth'>
+      <div className="authview" style={isLogin?{paddingTop:'7rem'}:{paddingTop:'2rem'}}>
         <div className="authview__container">
           <div className="authview__navigation">
             <div
@@ -151,7 +151,7 @@ const AuthView = ({signinUser, signoutUser, authStatus}) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
