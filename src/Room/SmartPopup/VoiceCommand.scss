@@ -1,4 +1,31 @@
 .helper {
-    height: 70vh;
-    max-width: 400px;
+    max-height: 60vh;
+    max-width: 50vw;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    &-container {
+        width: 90%;
+        padding: 1rem;
+        margin: auto;
+    }
+
+    &-list {
+        margin-top: 0.5rem;
+        &-item {
+          margin-bottom: 0.5rem;
+          border-bottom: 1px solid grey;
+          padding-bottom: 0.4rem;
+        //   font-size: 0.9rem;
+        }
+    }
+}
+
+.command-helper {
+    font-weight: 600;
+}
+.end-text-helper {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #6C63FF;
 }

@@ -31,6 +31,10 @@ export const commands = [
     {
         match : ['TAKEMETOTHE'],
         task : 'CHANGE_THEME'
+    },
+    {
+        match : ['HELPME', 'PLEASEHELPME', 'HELP'],
+        task : 'HELPME'
     }
     
 

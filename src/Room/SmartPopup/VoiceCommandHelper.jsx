@@ -4,28 +4,34 @@ const VoiceCommandHelper = () => {
   return (
     <div className="helper">
       <div className="helper-container">
+          <h3 className="helper__heading">Voice Commands</h3>
         <div className="helper-list">
-          <div className="helper-list-item">1. Mute Mic : Stop my mic.</div>
-          <div className="helper-list-item">2. Unmute Mic : Start my mic.</div>
+          <div className="helper-list-item">1.{' '}  <span className='command-helper'>Stop my mic.</span> : Mute Mic</div>
+          <div className="helper-list-item">2. {' '}  <span className='command-helper'>Start my mic.</span> : Unmute Mic</div>
           <div className="helper-list-item">
-            3. To start Camera : Start my video.
+            3. {' '}  <span className='command-helper'>Start my camera</span> : To start Camera
           </div>
           <div className="helper-list-item">
-            4. To stop Camera : Stop my video.
+            4.{' '} <span className='command-helper'>Stop my video.</span> : To stop Camera   
           </div>
           <div className="helper-list-item">
-            5. To start Screenshare : Share my screen.
+            5.{' '}   <span className='command-helper'>Share my screen.</span> : To start Screenshare 
           </div>
           <div className="helper-list-item">
-            6. To stop ScreenShare : Stop sharing my screen.
+            6. {' '} <span className='command-helper'>Stop sharing my screen.</span> : To stop ScreenShare 
           </div>
           <div className="helper-list-item">
-            7. Stop Voice Recognition : Goodbye.
+            7. {' '}  <span className='command-helper'>Help me</span> : Shows valid voice commands 
           </div>
-        </div>
+          <div className="helper-list-item">
+            8. {' '}  <span className='command-helper'>Goodbye.</span> : Stop Voice Recognition 
+          </div>
+          </div>
         <div className="end-text-helper">This Helper window will close automatically in 15s</div>
+
+        </div>
       </div>
-    </div>
+  
   );
 };
 
