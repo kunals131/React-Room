@@ -1,10 +1,10 @@
 export const commands = [
     {
-        match : ['TURNOFFMYMIC', 'TURNMICOFF', 'TURNMYMICOFF', 'STOPMYMIC'],
+        match : ['TURNOFFMYMIC', 'TURNMICOFF', 'TURNMYMICOFF', 'STOPMYMIC', 'MUTEME'],
         task : 'TURN_OFF_MIC'
     },
     {
-        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONMYEMIC', 'STARTMYMIC'],
+        match : ['TURNONMIC', 'TURNONMIKE', 'TURNONMICE', 'TURNONMICROPHONE', 'TURNONTHEMIC', 'TURNONMYMIC', 'STARTMYMIC', 'UNMUTEME'],
         task : 'TURN_ON_MIC'
     }, 
     {

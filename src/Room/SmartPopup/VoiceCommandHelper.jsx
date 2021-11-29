@@ -6,10 +6,10 @@ const VoiceCommandHelper = () => {
       <div className="helper-container">
           <h3 className="helper__heading">Voice Commands</h3>
         <div className="helper-list">
-          <div className="helper-list-item">1.{' '}  <span className='command-helper'>Stop my mic.</span> : Mute Mic</div>
-          <div className="helper-list-item">2. {' '}  <span className='command-helper'>Start my mic.</span> : Unmute Mic</div>
+          <div className="helper-list-item">1.{' '}  <span className='command-helper'>Mute me</span> : Mute Mic</div>
+          <div className="helper-list-item">2. {' '}  <span className='command-helper'>Turn on my mic</span> : Unmute Mic</div>
           <div className="helper-list-item">
-            3. {' '}  <span className='command-helper'>Start my camera</span> : To start Camera
+            3. {' '}  <span className='command-helper'>Start my video</span> : To start Camera
           </div>
           <div className="helper-list-item">
             4.{' '} <span className='command-helper'>Stop my video.</span> : To stop Camera   

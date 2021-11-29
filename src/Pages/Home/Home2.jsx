@@ -93,8 +93,8 @@ const Home2 = ({ setActivity }) => {
             </div>
           </div>
           <div className="Home__left-buttons">
-            <button onClick={handleCreate} className="Home__left-buttons-1">Create  Meeting</button>
-            <button onClick={()=>setJoin(!join)} className="Home__left-buttons-2">Join  Meeting</button>
+            <button onClick={handleCreate} className="Home__left-buttons-1">Create Room</button>
+            <button onClick={()=>setJoin(!join)} className="Home__left-buttons-2">Join Room</button>
           </div>
           <form onSubmit={handleSubmit} className="Home__left-input">
            { showLabel&&<motion.label  animate={{x : 0,opacity : 1}} initial={{x : -150, opacity : 0}} transition = {{type : 'spring', duration : 1}}  className="Home__left-label" htmlFor="id">Enter Join Id</motion.label>}
