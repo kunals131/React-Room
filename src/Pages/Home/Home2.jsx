@@ -99,7 +99,7 @@ const Home2 = ({ setActivity }) => {
           <form onSubmit={handleSubmit} className="Home__left-input">
            { showLabel&&<motion.label  animate={{x : 0,opacity : 1}} initial={{x : -150, opacity : 0}} transition = {{type : 'spring', duration : 1}}  className="Home__left-label" htmlFor="id">Enter Join Id</motion.label>}
 
-            {join&&<motion.input variants={InputVariant} exit='hidden' animate='visible' initial='hidden' onFocus={()=>setShowLabel(true)} onBlur={()=>setShowLabel(false)} type="text" value={input} id="id" onChange={(e)=>setInput(e.target.value)} />}
+            {join&&<motion.input placeholder="Enter Room Id & Hit Enter!" variants={InputVariant} exit='hidden' animate='visible' initial='hidden' onFocus={()=>setShowLabel(true)} onBlur={()=>setShowLabel(false)} type="text" value={input} id="id" onChange={(e)=>setInput(e.target.value)} />}
           </form>
         </div>
         <div className="Home__right">
