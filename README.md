@@ -3,11 +3,11 @@
 <a href="https://reactroom.netlify.app/"> React Room </a>
 </h1>
 
-<p>🌟 Honorable Mention in <a target="_blank" href="https://devpost.com/software/react-room-zy384i">Dolby.io Hackathon</a></p>
+<p align="center">🌟 Honorable Mention in <a target="_blank" href="https://devpost.com/software/react-room-zy384i">Dolby.io Hackathon</a></p>
 
 <p align="center">
   <a href="https://app.netlify.com/sites/reactroom/deploys" target="_blank">
-    <img src="https://api.netlify.com/api/v1/badges/1963b488-7b78-48c9-9e2d-6fb5e47ab3af/deploy-status" alt="Netlify Status" />
+    <img src="https://api.netlify.com/api/v1/badges/661a57bc-cff4-4182-b551-aa191297bcc3/deploy-status" alt="Netlify Status" />
   </a>
 </p>
 
