@@ -3,7 +3,7 @@
 <a href="https://reactroom.netlify.app/"> React Room </a>
 </h1>
 
-<p align="center">🌟 Honorable Mention in <a target="_blank" href="https://devpost.com/software/react-room-zy384i">Dolby.io Hackathon</a></p>
+<p align="center">🌟 Named one of the top 10 Honorable Mentions in <a target="_blank" href="https://devpost.com/software/react-room-zy384i">Dolby.io Hackathon</a></p>
 
 <p align="center">
   <a href="https://app.netlify.com/sites/reactroom/deploys" target="_blank">
@@ -39,3 +39,5 @@ One of the most difficult challenges was propagating a change to all participant
 
 # ⏭️ What's next for React Room
  I'll add more features to it, such as hostcontrols and past conference records storage.
+ 
+
