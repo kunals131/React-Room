@@ -104,7 +104,7 @@ const Home2 = ({ setActivity }) => {
         </div>
         <div className="Home__right">
           <div className="Home__right-img">
-            <img src={'https://res.cloudinary.com/insight-byte/image/upload/v1638211462/undraw_conference_call_b0w6_2_urmtx7.svg'} className='Home__right-img-main' alt="" />
+            <img src={'https://res.cloudinary.com/insight-byte/image/upload/v1649855869/React%20Rooms/undraw_conference_call_b0w6_axr4tx.svg'} className='Home__right-img-main' alt="" />
           </div>
         </div>
       </div>

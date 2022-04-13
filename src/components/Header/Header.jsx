@@ -13,7 +13,9 @@ const Header = (props) => {
   return (
     <header className="header" >
       <div className="header__content" style={{color : 'white'}}>
-        React Room
+        <a href="/" style={{fontSize : '1.2rem'}}>
+        <span style={{fontWeight : 'bold'}}>React</span> Room
+        </a >
         <div className="header__content__user" onClick={()=>setShowMenu(!showMenu)}>
          
           <p className={`header__content__user-name${showMenu&&' activez'}`}><i className="user icon"></i>{' '}{props.name}</p>
