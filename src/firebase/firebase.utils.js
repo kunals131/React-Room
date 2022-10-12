@@ -5,12 +5,12 @@ import { getFirestore,  setDoc, doc, getDoc, } from "firebase/firestore"
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBR8aU2hvBx36igR-oxdss9-dfnoFm7PUo",
-  authDomain: "react-class-f5ef1.firebaseapp.com",
-  projectId: "react-class-f5ef1",
-  storageBucket: "react-class-f5ef1.appspot.com",
-  messagingSenderId: "1017796196847",
-  appId: "1:1017796196847:web:d3c4218f41a7eeb85a1e1a"
+  apiKey: "AIzaSyBLOuQ5M_nOe41Sb372BBf0nZiI3zqNmXw",
+  authDomain: "react-room-c44cf.firebaseapp.com",
+  projectId: "react-room-c44cf",
+  storageBucket: "react-room-c44cf.appspot.com",
+  messagingSenderId: "690865553594",
+  appId: "1:690865553594:web:bb4a38b977f9a537320283"
 };
 
 export const app = initializeApp(firebaseConfig);
